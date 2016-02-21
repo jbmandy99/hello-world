@@ -1,0 +1,145 @@
+ 
+
+//proposalApp.service('performanceSummaryService', ['$scope', '$resource', '$routeParams', '$location', '$http',  
+//                                                  function ($scope, $resource, $routeParams, $location, $http   ) {
+//	var serviceUri = "http://localhost:8080/RESTfulExample/rest/metallica/";
+//	$scope.contractNumber = $routeParams.param1;
+////	$scope.loadForm = function() {
+//		$http.post(serviceUri + 'getPerformanceSummaryTO/' + $scope.contractNumber  ). 
+//		success(function(performanceSummaryTO) {
+////			$scope.user = performanceSummaryTO;
+////			if ($scope.planName===undefined && $scope.contractNumber != undefined){
+////				$scope.populateDropdown();
+////			}
+//			this.performanceSummaryTO = performanceSummaryTO;
+//		})
+//		.error(function(performanceSummaryTO) {
+//			alert('failed');
+//		});
+////	};
+//}]);
+proposalApp.service('performanceSummaryService', ['$http', function ($http) {
+	var serviceUri = "http://localhost:8080/RESTfulExample/rest/metallica/";
+
+    this.getPerformanceSummaryTO = function (id) {
+        return $http.post(serviceUri + '/' + id);
+    };
+ }]);
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//CUSTOM SERVICES
+proposalApp.service('performanceSummaryServicex',function(){
+    this.wrapList = [{value: 1, label: '0.00' }
+                            ,{ value: 2, label: '0.05' }
+                            ,{ value: 3, label: '0.10' }
+                            ,{ value: 4, label: '0.15' }
+                           ];
+    this.stateList = [{value: 'NE', label: 'NE' }
+                            ,{ value: 'NY', label: 'NY' }
+                           ];    
+    this.pricingPlatformList = [{value: 'P', label: 'Large Plan' }
+                            ,{ value: 'L', label: 'Legacy' }
+                                ,{ value: 'N', label: 'Neutral' }
+                           ];   
+    this.performanceYearList = [{value: 2015, label: '2015' }
+                            ,{ value: 2014, label: '2014' }
+                           ];    
+    
+    
+    this.performanceDateList = function(performanceYear){
+        var year2015 = [{value: '01/01/2015', label: '01/01' }
+                            ,{ value: '02/01/2015', label: '02/01' }
+                           ];
+        var year2014 = [{value: '01/01/2014', label: '03/01' }
+                            ,{ value: '02/01/2014', label: '04/01' }
+                           ]; 
+        if ( performanceYear =="2015"){
+                return year2015;  
+        }else  if (  performanceYear =="2014"){
+                return year2014;
+        }
+    }
+
+    
+    this.getExistingRequestTO = function(contractNumber){
+        var myTO = new Object();
+        myTO.contractNumber=contractNumber;      
+        myTO.planName="asdf";
+        myTO.dbPlan="No";
+        myTO.wrap=1;
+        myTO.dbPlan='No';
+        myTO.domicileState='NY';
+        myTO.pricingPlatform='N';
+        myTO.planNumber=12345;
+        return myTO;
+    }
+  
+        
+});
+
+
+
+proposalApp.service('cityService',function(){
+    this.city = "New York, NY"; 
+});
+
+proposalApp.service('tableHomeService',function(){
+    this.tableNameList = [{value: 1, label: 'Table Funds' }
+                            ,{ value: 2, label: 'Table Sub Funds' }
+                            ,{ value: 3, label: 'Investment Footnote' }
+                            ,{ value: 4, label: 'Performance Summary Footnote' }
+                            ,{ value: 5, label: 'TableB Footnote' }
+                            ,{ value: 6, label: 'Benchmark' }
+                           ];
+           
+    
+});
+
+
+proposalApp.service('tableBenchmarkListService',function(){
+         this.benchmarkList = [
+            { id: 1, desc: 'benchmark desc 1' },
+            { id: 2, desc: 'benchmark desc 2' },
+            { id: 3, desc: 'benchmark desc 3' },
+          ];
+        
+});
+
+
+
+proposalApp.service('tableBenchmarkService',function(){
+         this.benchmark =  
+            { id: 1, desc: 'name 1' , begin: '01/01/2001', eff: '01/01/2002', term: '01/01/2003' };
+        
+});
+
+proposalApp.service('tableFootnoteListService',function(){
+         this.footnoteList = [
+            { id: 1, desc: 'footnote desc 1' },
+            { id: 2, desc: 'footnote desc 2' },
+            { id: 3, desc: 'footnote desc 3' },
+          ];
+        
+});
+
+proposalApp.service('tableFootnoteService',function(){
+         this.footnote =  
+            { id: 1, desc: 'name 1'   };
+        
+});
+
+proposalApp.service('tableSharedService',function(){
+    this.investmentList = [{value: 1, label: 'Mutual Funds 1' }
+                            ,{ value: 2, label: 'Mutual Funds 2' }
+                            ,{ value: 3, label: 'Mutual Funds 3' }
+                            ,{ value: 4, label: 'Mutual Funds 4' }
+                           ];
+        
+});
+
+

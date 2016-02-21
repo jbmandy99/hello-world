@@ -1,0 +1,22 @@
+<form name="tableFootnoteForm" ng-submit="tableFootnoteForm.$valid" novalidate >
+ 
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+         
+        <div class="form-group">
+            <!--set the mode-->
+                     <br/>Message ID  <input type="text" class="form-control" ng-model="footnote.id"  required /> d
+                     <br/>Message Body  <input type="text" class="form-control" ng-model="footnote.desc"  required /> d
+            
+        <br/><button ng-click="tableFootnoteSave()">Save</button>
+        <button ng-click="tableFootnoteCancel()">Cancel</button> 
+    
+            
+            
+     
+        </div>
+        
+
+    </div>
+</div>
+</form>     

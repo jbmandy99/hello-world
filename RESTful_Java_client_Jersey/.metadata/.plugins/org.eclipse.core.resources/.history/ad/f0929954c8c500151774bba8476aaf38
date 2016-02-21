@@ -1,0 +1,317 @@
+      
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                   
+//CONTROLLERS  inject the service, resource, route/urlParams
+proposalApp.controller('performanceSummaryWithContractNumberController',  ['$scope', '$resource', '$routeParams', '$location', '$http', '$sce','performanceSummaryService', 
+                                                                           function ($scope, $resource, $routeParams, $location, $http, $sce,performanceSummaryService ) {
+	var serviceUri = "http://localhost:8080/RESTfulExample/rest/metallica/";
+	$scope.contractNumber = $routeParams.param1;	
+
+	$scope.loadForm = function() {
+ 		$scope.user =  performanceSummaryService.performanceSummaryTO($routeParams.param1)
+		success(function(performanceSummaryTO) {
+			$scope.user = performanceSummaryTO;
+			$scope.master = angular.copy( $scope.user);
+			if ($scope.planName===undefined && $scope.contractNumber != undefined){
+				$scope.populateDropdown();
+			}
+		})
+        .error(function (error) {
+            $scope.status = 'Unable to load customer data: ' + error.message;
+        });
+ 
+	};
+	
+//	$scope.loadForm = function() {
+//		$http.post(serviceUri + 'getPerformanceSummaryTO/' + $scope.contractNumber  ). 
+//		success(function(performanceSummaryTO) {
+//			$scope.user = performanceSummaryTO;
+//			$scope.master = angular.copy( $scope.user);
+//			if ($scope.planName===undefined && $scope.contractNumber != undefined){
+//				$scope.populateDropdown();
+//			}
+//		})
+//		.error(function(performanceSummaryTO) {
+//			alert('failed');
+//		});
+//	};
+	
+	$scope.resetForm = function() {
+		$scope.user = angular.copy($scope.master);
+		$scope.populateDropdown();
+	};
+
+	$scope.populateDropdown = function(){
+		$scope.user.domicileState = setFromDropdown($scope.user.stateList,$scope.user.domicileState);
+		$scope.user.pricingPlatform = setFromDropdown($scope.user.pricingPlatformList,$scope.user.pricingPlatform);
+		$scope.user.wrap = setFromDropdownByLabel($scope.user.wrapList,$scope.user.wrap);
+		$scope.user.performanceYear = setFromDropdown($scope.user.performanceYearList,$scope.user.performanceYear);
+		$scope.user.performanceDate = setFromDropdown($scope.user.performanceMonthDayList,$scope.user.performanceDate);
+	};	
+
+	//http://stackoverflow.com/questions/21628378/angularjs-display-blob-pdf-in-an-angular-app
+	$scope.performanceSummaryGeneratePdf = function (user) {
+		var validationWithoutContractNumber =   $scope.user.domicileState !== undefined && $scope.user.pricingPlatform !== undefined;
+		if (validationWithoutContractNumber) {
+	           var fileName = "test.pdf";
+	            var a = document.createElement("a");
+	            document.body.appendChild(a);
+	            a.style = "display: none";
+	            
+	            
+	   	            
+			//$http.get(serviceUri + 'getPdfDocument/1974'     , {responseType: 'arraybuffer'})
+	            $http.get(serviceUri + 'getJeffByte'   , {responseType: 'arraybuffer'})
+//			  .success(function (result) {
+////	                var file = new Blob([result], {type: 'application/pdf'});
+//				  var file = new Blob([result]);
+//	                var fileURL = URL.createObjectURL(file);
+////	                $scope.content = $sce.trustAsResourceUrl(fileURL);
+////	                a.href = $scope.content;
+////	                a.download = fileName;
+////	                a.click();
+//	                alert('asdf');
+//				    window.open(fileURL);
+//				    //window.location.href = fileURL;
+	                
+	                
+	                .success(function (result) {
+		                var file = new Blob([result], {type: 'application/pdf'});
+		                var fileURL = URL.createObjectURL(file);
+		                $scope.content = fileURL; // $sce.trustAsResourceUrl(fileURL);
+//		                a.href = fileURL;
+//		                a.download = fileName;
+//		                a.click();
+//		                window.open(fileURL);
+//		              window.location.href = fileURL;
+	                 
+			})		
+	            
+//	            $http
+//	            .get(serviceUri + 'printPDF/')
+//	            .success(function(data){
+//	                //data is link to pdf
+//	                $window.open(data);
+//	            })
+	            
+			.error(function(response) {
+				alert('failed');
+			});
+			
+			
+			
+	            
+	            
+	            
+	            
+	            
+	            
+	            
+//	            this works
+//	            $http.get(serviceUri + 'getJeffPdf'     , {responseType: 'arraybuffer'})
+//				  .success(function (result) {
+//		                var file = new Blob([result], {type: 'application/pdf'});
+//		                var fileURL = URL.createObjectURL(file);
+//		                $scope.content = $sce.trustAsResourceUrl(fileURL);
+//		                a.href = $scope.content;
+//		                a.download = fileName;
+//		                a.click();
+//				})		
+//		            
+//				.error(function(response) {
+//					alert('failed');
+//				});
+//	            
+	            
+	            
+	            
+	            
+	            
+			
+		}
+	};	
+
+
+	$scope.changePerformanceYear = function() {
+		$http.post(serviceUri + "getPerformanceDateList/" +$scope.user.performanceYear.value).
+		success(function(performanceSummaryTO) {
+			$scope.user.performanceMonthDayList = performanceSummaryTO.performanceMonthDayList;
+			$scope.user.performanceDate = setFromDropdown($scope.user.performanceMonthDayList,performanceSummaryTO.performanceDate);
+		})
+		.error(function(performanceSummaryTO) {
+			alert('failed');
+		});
+	};  
+
+	//keep together  
+ 
+
+	$scope.reset = function(form) {
+		if (form) {
+			form.$setPristine();
+			form.$setUntouched();
+		}
+ 		$scope.resetForm();
+	};
+
+	$scope.loadForm();
+	
+	//keep together 
+	
+	
+	
+	
+	$scope.saveAsPDF = function() {
+	    var form = document.createElement("form");
+	    form.setAttribute("action",  serviceUri + 'getJeffByte' );
+	    form.setAttribute("method", "get");
+	    form.setAttribute("target", "_blank");
+
+	    var hiddenEle1 = document.createElement("input");
+	    hiddenEle1.setAttribute("type", "hidden");
+	    hiddenEle1.setAttribute("name", "some");
+	    hiddenEle1.setAttribute("value", value);
+
+	    form.append(hiddenEle1 );
+
+	    form.submit();
+
+	}
+	
+
+}]);
+
+
+function setFromDropdown(list,selectedItem){
+	  for (var i=0; i <  list.length; i++){
+	    	 if (list[i].value === selectedItem){
+	    		 selectedItem = list[i];
+	    		 break;
+	    	 }
+	  }
+	  return selectedItem;
+}
+
+function setFromDropdownByLabel(list,selectedItem){
+	  for (var i=0; i <  list.length; i++){
+	    	 if (list[i].label === selectedItem){
+	    		 selectedItem = list[i];
+	    		 break;
+	    	 }
+	  }
+	  return selectedItem;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                   
+//CONTROLLERS  inject the service, resource, route/urlParams
+proposalApp.controller('performanceSummaryController',  ['$scope', '$resource', '$routeParams', '$location', '$http',  'performanceSummaryService',
+    function ($scope, $resource, $routeParams, $location, $http, performanceSummaryService) {
+	
+		$scope.loadForm = function() {
+		  var serviceUri = "http://localhost:8080/RESTfulExample/rest/metallica/";
+	 	  $http.post(serviceUri + 'getPerformanceSummaryTO/' + $scope.contractNumber  ). 
+		  success(function(performanceSummaryTO) {
+			  $scope.user = performanceSummaryTO;
+		  })
+		  .error(function(performanceSummaryTO) {
+
+		      alert('failed');
+		  });
+		};
+		
+		
+     $scope.performanceSummaryGenerate = function (user) {
+         var validationWithoutContractNumber =   $scope.user.domicileState !== undefined && $scope.user.pricingPlatform !== undefined;
+         if (validationWithoutContractNumber) {
+             alert("this will call the generate pdf without contract");
+         }
+     };
+     
+	    $scope.master = {};
+		
+	    $scope.update = function( user ) {
+	      $scope.master = angular.copy(user);
+	    };
+	
+	    $scope.reset = function(form) {
+	      if (form) {
+	        form.$setPristine();
+	        form.$setUntouched();
+	      }
+	      $scope.user = angular.copy($scope.master);
+	      $scope.loadForm();
+	    };
+	
+	    $scope.reset();
+	    $scope.loadForm();
+   
+ }]);
+ 

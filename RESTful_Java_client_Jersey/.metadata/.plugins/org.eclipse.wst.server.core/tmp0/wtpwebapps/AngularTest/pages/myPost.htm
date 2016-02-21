@@ -1,0 +1,43 @@
+ 
+    <form ng-submit="SendHttpPostData()">
+        <p>First Name: <input type="text" name="firstName" ng-model="firstName" required /></p>
+        <p>Last Name: <input type="text" name="lastName" ng-model="lastName" required /></p>
+        <p>Age : <input type="number" name="age" ng-model="age" required /></p>
+        <input type="submit" value="Submit" />
+        <hr />
+        {{ ServerResponse }}
+    </form>
+ 
+
+<script>
+    var myApp = angular.module("proposalApp", []);
+    myApp.controller("HttpPostController", function ($scope, $http) {
+
+        $scope.SendHttpPostData = function () {
+
+            var data = $.param({
+                firstName: $scope.firstName,
+                lastName: $scope.lastName,
+                age : $scope.age
+            });
+        
+            var config = {
+                headers : {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
+                }
+            }
+
+            $http.post('/ServerRequest/PostDataResponse', data, config)
+            .success(function (data, status, headers, config) {
+                $scope.ServerResponse = data;
+            })
+            .error(function (data, status, header, config) {
+                $scope.ServerResponse = "Data: " + data +
+                    "<hr />status: " + status +
+                    "<hr />headers: " + header +
+                    "<hr />config: " + config;
+            });
+        };
+
+    });
+</script>

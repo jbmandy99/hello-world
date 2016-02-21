@@ -1,0 +1,6 @@
+INDEX VERSION 1.3+C:\workspaceGit\RESTful_Java_client_Jersey\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2927215131.index
+324736888.index
+911517016.index
+1254676643.index
+1306888988.index

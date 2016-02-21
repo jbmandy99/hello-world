@@ -1,0 +1,25 @@
+<form name="tableSubFundForm" ng-submit="tableFundForm.$valid" novalidate >
+ 
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+         
+        <div class="form-group">
+            <!--set the mode-->
+        <br/>Investment Fund Name  <input type="text" class="form-control" ng-model="investmentfundName"  required /> d
+            
+        <br/><button ng-click="tableSubFundsSave()">Save</button>
+        <button ng-click="tableSubFundsCancel()">Cancel</button> 
+            <button ng-click="tableSubFundsCancel()">Add Sub Fund</button> 
+            
+            <hr/>
+            <br/>Fund Name   <input class="form-control" type="text" ng-model="fundName" required  /> 
+   
+             Company Code  <input class="form-control"type="text" ng-model="companyCode"  required /> 
+             Fund Allocation Percent  <input class="form-control" type="text" ng-model="fundAlloctionPercent"  required /> 
+     
+        </div>
+        
+
+    </div>
+</div>
+</form>           

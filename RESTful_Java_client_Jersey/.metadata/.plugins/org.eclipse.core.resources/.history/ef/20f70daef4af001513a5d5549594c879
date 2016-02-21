@@ -1,0 +1,73 @@
+<form name="form"  ng-submit="performanceSummaryForm.$valid" class="css-form" novalidate>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+ 
+        <div class="form-group" ng-hide="contractNumber==undefined">
+            <!--set the mode-->
+            <br/><label for="contractNumber">Contract Number</label> {{contractNumber}}
+            <br/><label for="planName">Plan Name</label> {{planName}}
+            <br/><label for="planName">Plan Number</label> {{planNumber}}
+            <br/><label for="dbPlan">DB Plan</label> {{dbPlan}}
+            
+            <br/><label for="performanceYear">Performance Year</label>  
+            <select 
+            	ng-options="performanceYearx as performanceYearx.label for performanceYearx in performanceYearList track by performanceYearx.value"
+            	 required title="" name="performanceYearValidate"
+             	ng-model="performanceYear"> 
+            </select>
+            <div ng-show="form.$submitted || form.performanceYearValidate.$touched">
+                <div ng-show="form.performanceYearValidate.$error.required">Please select.</div>
+            </div>  
+            
+            <br/><label for="performanceDate">Performance Date</label>  
+            <select ng-model="performanceDate" name="performanceDate" class="form-control" required="" title="" >
+                <option ng-repeat="performanceDate in performanceDateList" value="{{performanceDate.value}}">{{performanceDate.label}}</option>
+            </select>
+            <div ng-show="form.$submitted || form.performanceDate.$touched">
+                <div ng-show="form.performanceDate.$error.required">Please select.</div>
+            </div>  
+            
+            <br/><label>Selected Funds Only:
+                <input type="checkbox" ng-model="selectedFundsOnly">
+                </label>
+        </div>
+         
+        <div class="form-group">
+            <!--set the mode-->
+            <br/><label for="wrap">Wrap Class</label>
+            <select
+                ng-options="wrapx as wrapx.label for wrapx in wrapList track by wrapx.value"
+            	 required title="Admin fee decoded" name="wrap" 
+            	ng-model="wrap" >
+            </select>
+            <div ng-show="form.$submitted || form.wrap.$touched">
+                <div ng-show="form.wrap.$error.required">Please select.</div>
+            </div>
+            
+            <br/><label for="domicileState">Domicile State </label>  
+            <select ng-options="domicileStatex as domicileStatex.label for domicileStatex in stateList track by domicileStatex.value"
+            	 required title="Permanent State Address" name="domicileStateValidate"
+             	ng-model="domicileState">
+            </select>
+            <div ng-show="form.$submitted || form.domicileStateValidate.$touched">
+                <div ng-show="form.domicileStateValidate.$error.required">Please select.</div>
+            </div>
+            
+            <br/><label for="pricingPlatform">Pricing Platform</label>
+            <select 
+            	ng-options="pricingPlatformx as pricingPlatformx.label for pricingPlatformx in pricingPlatformList track by pricingPlatformx.value"
+            	 required title="" name="pricingPlatform" 
+            	ng-model="pricingPlatform" >
+             </select>
+            <div ng-show="form.$submitted || form.pricingPlatform.$touched">
+                <div ng-show="form.pricingPlatform.$error.required">Please select.</div>
+            </div>            
+        </div>
+        
+        <button ng-click="performanceSummaryGenerate()">Generate</button>
+         
+    </div>
+</div>
+ 
+</form>            
+            

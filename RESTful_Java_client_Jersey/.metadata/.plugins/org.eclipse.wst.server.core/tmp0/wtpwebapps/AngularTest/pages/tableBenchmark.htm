@@ -1,0 +1,25 @@
+<form name="tableBenchmarkForm" ng-submit="tableBenchmarkForm.$valid" novalidate >
+ 
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+         
+        <div class="form-group">
+            <!--set the mode-->
+                     <br/>Benchmark ID  <input type="text" class="form-control" ng-model="benchmark.id"  required /> d
+                     <br/>Benchmark Name <input type="text" class="form-control" ng-model="benchmark.desc"  required /> d
+                    <br/>Benchmark Begin Date <input type="text" class="form-control" ng-model="benchmark.begin"  required /> d
+                    <br/>Benchmark Effective Date <input type="text" class="form-control" ng-model="benchmark.eff"  required /> d
+                    <br/>Benchmark Termination Date <input type="text" class="form-control" ng-model="benchmark.term"  required /> d
+            
+        <br/><button ng-click="tableBenchmarkSave()">Save</button>
+             <button ng-click="tableBenchmarkCancel()">Cancel</button>
+    
+            
+            
+     
+        </div>
+        
+
+    </div>
+</div>
+</form>     

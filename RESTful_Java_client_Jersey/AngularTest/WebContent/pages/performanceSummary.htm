@@ -1,0 +1,121 @@
+<form name="form" ng-submit="performanceSummaryForm.$valid"
+	class="css-form" novalidate>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<div class="form-group"
+				ng-show="performanceSummaryAppStatus==='Loading'">
+				<br />
+				<blink>
+					<h1>
+						{{ performanceSummaryAppStatus }}
+						<h1>
+				</blink>
+			</div>
+			<div class="form-group"
+				ng-hide="performanceSummaryAppStatus==='Loading'">
+
+				<div class="form-group"
+					ng-hide="contractNumber==undefined || contractNumber=='0'">
+					<!--set the mode-->
+					<br /> <label for="contractNumber">Contract Number</label>
+					{{user.contractNumber}} <br /> <label for="planName">Plan
+						Name</label> {{user.planName}} <br /> <label for="planNumber">Plan
+						Number</label> {{user.planNumber}} <br /> <label for="dbPlan">DB
+						Plan</label> {{user.dbPlan}} <br /> <label for="performanceYear">Performance
+						Year</label> <select
+						ng-options="performanceYearx as performanceYearx.label for performanceYearx in user.performanceYearList track by performanceYearx.value"
+						required title="" name="performanceYearValidate"
+						ng-change="changePerformanceYear()"
+						ng-model="user.performanceYear">
+					</select>
+					<div
+						ng-show="form.$submitted || form.performanceYearValidate.$touched">
+						<div ng-show="form.performanceYearValidate.$error.required">Please
+							select.</div>
+					</div>
+
+					<br /> <label for="performanceDate">Performance Dates</label> <select
+						ng-options="performanceDatex as performanceDatex.label for performanceDatex in user.performanceMonthDayList track by performanceDatex.value"
+						required title="" name="performanceDateValidate"
+						ng-model="user.performanceDate">
+					</select>
+					<div
+						ng-show="form.$submitted || form.performanceDateValidate.$touched">
+						<div ng-show="form.performanceDateValidate.$error.required">Please
+							select.</div>
+					</div>
+					{{user.performanceDate}} <br /> <label>Selected Funds
+						Only: <input type="checkbox" ng-model="user.selectedFundsOnly">
+					</label>
+				</div>
+
+
+				<div class="form-group"
+					ng-hide="performanceSummaryAppStatus==='Loading'">
+					<div class="form-group">
+						<!--set the mode-->
+						<br /> <label for="wrap">Wrap Class</label> <select
+							ng-options="wrapx as wrapx.label for wrapx in user.wrapList track by wrapx.value"
+							required title="Admin fee decoded" name="wrap"
+							ng-model="user.wrap">
+						</select>
+						<div ng-show="form.$submitted || form.wrap.$touched">
+							<div ng-show="form.wrap.$error.required">Please select.</div>
+						</div>
+
+						<br /> <label for="domicileState">Domicile State </label> <select
+							ng-options="domicileStatex as domicileStatex.label for domicileStatex in user.stateList track by domicileStatex.value"
+							required title="Permanent State Address"
+							name="domicileStateValidate" ng-model="user.domicileState">
+						</select>
+						<div
+							ng-show="form.$submitted || form.domicileStateValidate.$touched">
+							<div ng-show="form.domicileStateValidate.$error.required">Please
+								select.</div>
+						</div>
+					</div>
+
+
+					<br /> <label for="pricingPlatform">Pricing Platform</label> <select
+						ng-options="pricingPlatformx as pricingPlatformx.label for pricingPlatformx in user.pricingPlatformList track by pricingPlatformx.value"
+						required title="" name="pricingPlatform"
+						ng-model="user.pricingPlatform">
+					</select>
+					<div ng-show="form.$submitted || form.pricingPlatform.$touched">
+						<div ng-show="form.pricingPlatform.$error.required">Please
+							select.</div>
+					</div>
+				</div>
+				<object ng-show="content" data="{{content}}" type="application/pdf"
+					style="width: 100%; height: 400px;"></object>
+				<!-- <button ng-click="performanceSummaryGenerate()">Generate</button> -->
+
+
+
+
+				<input type="button" ng-click="reset(form)" value="Reset"
+					onmouseover="this.focus()" /> 
+				<input type="button"
+					ng-click="performanceSummaryGeneratePdf()" value="Generate"
+					onmouseover="this.focus()" /> 
+				<input type="button"
+					ng-click="saveAsPDF()" value="save as pdf"
+					onmouseover="this.focus()" />
+				<input type="button"
+					ng-click="passObject()" value="pass object"
+					 />					
+					
+					
+					
+				<my-download id="content" get-data="getBlob()" />
+				
+
+				
+				<br/>{{ performanceSummaryAppStatus }}
+			</div>
+		</div>
+	</div>
+	
+
+</form>
+
