@@ -1,0 +1,12 @@
+127.0.0.1 - - [06/Jan/2016:12:48:42 -0600] "GET / HTTP/1.1" 404 951
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:05 -0600] "GET /AngularTest/index.jsp HTTP/1.1" 200 457
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/index.htm HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/vendor/angular-route.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/vendor/angular-resource.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/app.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/vendor/angular.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/routes.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/service.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/js/controller.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:09 -0600] "GET /AngularTest/pages/performanceSummary.htm HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [06/Jan/2016:12:58:10 -0600] "POST /RESTfulExample/rest/metallica/getPerformanceSummaryTO/12345 HTTP/1.1" 200 798

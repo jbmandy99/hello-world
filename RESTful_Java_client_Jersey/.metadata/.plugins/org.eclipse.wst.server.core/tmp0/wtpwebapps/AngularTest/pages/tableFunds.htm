@@ -1,0 +1,60 @@
+<form name="form"  ng-submit="tableFundForm.$valid" class="css-form" novalidate>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+         
+        <div class="form-group">
+            <!--set the mode-->
+            <br/>Investment Fund   
+            <select ng-model="investmentFund" class="form-control" required="" >
+                <option ng-repeat="list in investmentfundNameList    " value="{{list.value}}">{{list.label}}</option>
+            </select>
+            <div ng-show="form.$submitted || form.investmentFund.$touched">
+                <div ng-show="form.investmentFund.$error.required">Please select.</div>
+            </div>
+            
+            <br/>Investment Fund Name  <input type="text" ng-model="investmentFundName"   /> b
+            <br/>Investment Fund Code   <input  type="text" ng-model="investmentFund"  /> 
+           
+            <br/>Investment Fee Amount  <input type="text" ng-model="investmentFeeAmount"   /> 
+            <br/>Investment Management Type Indicator  <input type="text" ng-model="investmentManagementTypeIndicator"   /> 
+            <br/>Fund Category   <input type="text" ng-model="fundCategory"   /> 
+            <br/>Fee Disclosure Footnote ID   <input type="text" ng-model="feeDisclosureFootnoteID"   /> 
+            <br/>Fee Disclosure Footnote   <input type="text" ng-model="feeDisclosureFootnote"   /> 
+            <br/>Performance Summary Footnote ID   <input type="text" ng-model="PerformanceSummaryFootnoteID"   /> d
+            
+            <br/>Table B Footnote ID <input type="text" ng-model="tableBFootnoteID"   /> d
+            <br/>Table B Footnote <input type="text" ng-model="tableBFootnote"   /> 
+            <br/>Sub Fund Indicator <input type="text" ng-model="subFundIndicator"   /> 
+            <br/>Investment Manager <input type="text" ng-model="investmentManager"   /> d
+            <br/>Fund Inception Date <input type="text" ng-model="fundInceptionDate"   /> 
+            <br/>Product Effective Date <input type="text" ng-model="productEffectiveDate"   /> 
+            <br/>Legacy Product Charge Percent <input type="text" ng-model="legacyProductChargePercent"   /> 
+            <br/>Neutral Product Charge Percent <input type="text" ng-model="neutralProductChargePercent"   /> 
+            <br/>Shareholder Service Fee Percent <input type="text" ng-model="shareholderServiceFeePercent"   /> 
+            <br/>United Accues Pay Indicator <input type="text" ng-model="unitedAccuesPayIndicator"   /> r
+            <br/>Shareholder Code <input type="text" ng-model="shareholderCode"   /> d
+            <br/>United Investment ID <input type="text" ng-model="unitedInvestmentID"   /> 
+            <br/>Companion Investment ID <input type="text" ng-model="companionInvestmentID"   /> 
+            <br/>Objective English Description <input type="text" ng-model="objectiveEnglishDescription"   /> 
+            <br/>Objective Spanish Description <input type="text" ng-model="objectiveSpanishDescription"   /> 
+            <br/>Enrollment Book Category English Name <input type="text" ng-model="enrollmentBookCategoryEnglishName"   /> 
+            <br/>Risk Potential <input type="text" ng-model="riskPotential"   /> 
+            <br/>Investment Objective Description <input type="text" ng-model="InvestmentObjectiveDescription"   /> 
+            <br/>Benchmark ID <input type="text" ng-model="benchmarkID"   /> 
+            <br/>Redemption Fee Percent <input type="text" ng-model="redemptionFeePercent"   /> 
+            <br/>Maximum Sales Charge Percent <input type="text" ng-model="maximumSalesChargePercent"   /> 
+            <br/>Deferred Sales Charge Percent <input type="text" ng-model="deferredSalesChargePercent"   /> 
+            <br/>Annuity Pricing Factor Percent <input type="text" ng-model="annuityPricingFactorPercent"   /> 
+            <br/>Deptartment of Labor Name <input type="text" ng-model="departmentOfLaborName"   /> 
+            <br/>Asset Class Name <input type="text" ng-model="assetClassName"   />  
+            <br/>Status Code <input type="text" ng-model="statusCode"   /> d
+                    </div>
+        
+        <button ng-click="tableFundsSave()">Save</button>
+         
+        <button ng-click="tableFundsCancel()">Cancel</button>
+    </div>
+</div>
+</form>            
+            

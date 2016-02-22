@@ -1,0 +1,17 @@
+<form name="tableHomeForm"  class="css-form" novalidate>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+     <div class="form-group">    
+      <p>Table Name : </p>
+      <select ng-model="user.tableName" name="uTableName" class="form-control" required=""  >
+        <option ng-repeat="list in tableNameList    " value="{{list.value}}">{{list.label}}</option>
+      </select>
+      <div ng-show="tableHomeForm.$submitted || tableHomeForm.uTableName.$touched">
+        <span ng-show="tableHomeForm.uTableName.$error.required">required.</span>
+      </div>
+         
+      <input type="submit" ng-click="update(user)" value="Next" />
+         
+    </div>
+</div>
+</form>
